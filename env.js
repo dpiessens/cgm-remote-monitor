@@ -4,6 +4,7 @@ var _ = require('lodash');
 var fs = require('fs');
 var crypto = require('crypto');
 var consts = require('./lib/constants');
+var appInsights = require("applicationinsights");
 
 var env = {
   settings: require('./lib/settings')()
@@ -28,6 +29,7 @@ function config ( ) {
   setVersion();
   setMongo();
   updateSettings();
+  setApplicationInsights();
 
   // require authorization for entering treatments
   env.treatments_auth = readENV('TREATMENTS_AUTH',false);
@@ -116,6 +118,14 @@ function setMongo() {
     DB_COLLECTION = DB.collection ? DB.collection : env.mongo_collection;
   env.mongo = DB_URL;
   env.mongo_collection = DB_COLLECTION;
+}
+
+function setApplicationInsights() {
+  var apiKey = readENV('APPINSIGHTS_INSTRUMENTATIONKEY', null);
+  if (apiKey) {
+    appInsights.setup(apiKey)
+               .start();
+  }
 }
 
 function updateSettings() {
