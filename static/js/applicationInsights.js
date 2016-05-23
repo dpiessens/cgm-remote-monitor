@@ -4,6 +4,7 @@
 (function () {
   'use strict';
 
+  var $ = window.$;
   checkAppInsights();
 
   function checkAppInsights() {
@@ -11,6 +12,7 @@
         success: function requestSuccess(status) {
           if (status.enabled) {
               startAppInsights(status.key);
+              console.log('Application Insights Loaded');
           }  
         }
     });      
@@ -31,6 +33,5 @@
     }({ instrumentationKey: applicationKey });
     window.appInsights = appInsights;
     appInsights.trackPageView();
-    console.log('Application Insights Loaded');
   }
 })();
