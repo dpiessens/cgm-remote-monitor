@@ -122,6 +122,8 @@ function setMongo() {
 
 function setApplicationInsights() {
   var apiKey = readENV('APPINSIGHTS_INSTRUMENTATIONKEY', null);
+  env.appInsights = apiKey;
+  
   if (apiKey) {
     appInsights.setup(apiKey)
                .start();
