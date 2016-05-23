@@ -13,3 +13,4 @@ var appInsights = window.appInsights || function (config) {
 }({ instrumentationKey: "f37077d3-0471-47e0-bd1e-e6e8e125fa7a" });
 window.appInsights = appInsights;
 appInsights.trackPageView();
+console.log('Application Insights Loaded');
